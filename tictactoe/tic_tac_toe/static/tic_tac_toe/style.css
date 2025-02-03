@@ -1,0 +1,178 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    --s: 200px; /* control the size */
+    --c1: #1d1d1d;
+    --c2: #4e4f51;
+    --c3: #3c3c3c;
+    background: repeating-conic-gradient(
+            from 30deg,
+            #0000 0 120deg,
+            var(--c3) 0 180deg
+          )
+          calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+        repeating-conic-gradient(
+          from 30deg,
+          var(--c1) 0 60deg,
+          var(--c2) 0 120deg,
+          var(--c3) 0 180deg
+        );
+    background-size: var(--s) calc(var(--s) * 0.577);
+}
+.game-container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    justify-content: center;
+    perspective: 1000px;
+}
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform-style: preserve-3d;
+}
+.cell:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: rotateY(180deg);
+}
+.cell.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+/* From Uiverse.io by Navarog21 */ 
+.restart-button {
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: 3px ridge #149CEA;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.restart-button::after {
+    content: "";
+    position: absolute;
+    top: -1px; /* Reduced to 1px */
+    left: 3%;
+    width: 95%;
+    height: 1px; /* Reduced to 1px */
+    background-color: #212121;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+.restart-button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: calc(100% - 1px); /* Reduced to 1px */
+    left: 3%;
+    width: 95%;
+    height: 1px; /* Reduced to 1px */
+    background-color: #212121;
+    transition: 0.5s;
+}
+
+.restart-button:hover::before, .restart-button:hover::after {
+    transform: scale(0);
+}
+
+.restart-button:hover {
+    box-shadow: inset 0px 0px 25px #1479EA;
+}
+.animate-win {
+    animation: win-animation 1s ease-in-out;
+}
+@keyframes win-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#restartButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#restartButton.clicked {
+    transform: scale(1.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        --c1: #1d1d1d; /* Keep the same dark color */
+        --c2: #4e4f51;
+        --c3: #3c3c3c;
+        background: repeating-conic-gradient(
+                from 30deg,
+                #0000 0 120deg,
+                var(--c3) 0 180deg
+              )
+              calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+            repeating-conic-gradient(
+              from 30deg,
+              var(--c1) 0 60deg,
+              var(--c2) 0 120deg,
+              var(--c3) 0 180deg
+            );
+        background-size: var(--s) calc(var(--s) * 0.577);
+    }
+    .game-container {
+        background: #333;
+        color: #fff;
+    }
+    .cell {
+        background-color: #444;
+        border: 2px solid #666;
+    }
+    .cell:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .message {
+        color: #ccc;
+    }
+}
